@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="az" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azerbaijan Startup Community — Dashboard</title>
+    <link rel="icon" type="image/png" href="logos/asc-transparent.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <style>
+        body { background-color: #f8fafc; }
+        .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.55); }
+        .glass-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.85); box-shadow: 0 10px 40px -12px rgba(37,99,235,0.12); }
+        .lang-btn.active { background: linear-gradient(135deg,#00C9A7,#00D2FF); color:#fff; }
+        .orb { position:absolute; border-radius:9999px; filter:blur(80px); mix-blend-mode:multiply; pointer-events:none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-cyan selection:text-white">
+
+    <div class="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+        <div class="orb top-[-10%] left-[-10%] w-96 h-96 bg-brand-cyan/30 animate-blob"></div>
+        <div class="orb top-[20%] right-[-12%] w-[30rem] h-[30rem] bg-brand-teal/25 animate-blob-slow"></div>
+        <div class="orb bottom-[-15%] left-[15%] w-[42rem] h-[42rem] bg-brand-blue/15 animate-blob"></div>
+    </div>
+
+    <nav class="relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div class="glass rounded-2xl flex items-center justify-between px-4 sm:px-6 py-3">
+                <a href="index.html" class="group shrink-0">
+                    <img src="logos/asc-logo-tight.png" alt="Azerbaijan Startup Community" class="h-12 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-500">
+                </a>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <button id="langToggle" class="lang-btn active flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-full border border-slate-200 text-slate-600 shrink-0">
+                        <span data-lang="az">AZ</span><span class="opacity-40">/</span><span data-lang="en" class="opacity-40">EN</span>
+                    </button>
+                    <button id="logoutBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-white bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue hover:-translate-y-0.5 transition-all duration-300">
+                        <span data-i18n="nav.logout">Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-8 pb-16 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto space-y-6">
+            <!-- Welcome -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10">
+                <div class="flex items-center gap-5">
+                    <div id="avatar" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-brand-teal via-brand-cyan to-brand-blue flex items-center justify-center font-heading text-2xl sm:text-3xl font-bold text-white shrink-0">A</div>
+                    <div class="min-w-0">
+                        <h1 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 truncate" id="userName">—</h1>
+                        <div class="flex items-center gap-2 mt-2 flex-wrap">
+                            <span id="roleBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-brand-teal to-brand-cyan text-white">—</span>
+                            <span class="text-sm text-slate-500" id="userEmail">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Startup / mentor profile -->
+            <div id="profileSection" class="glass-card rounded-3xl p-6 sm:p-10">
+                <h2 class="font-heading text-xl sm:text-2xl font-bold text-slate-900 mb-5" data-i18n="dash.profile">Profil</h2>
+                <div id="profileContent" class="space-y-4"></div>
+            </div>
+
+            <!-- Status -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-teal to-brand-cyan flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-lg font-bold text-slate-900" data-i18n="dash.status.title">Müraciətin göndərildi</h3>
+                        <p class="text-slate-600 text-sm mt-1" data-i18n="dash.status.sub">Komandamız müraciətini nəzərdən keçirir və tezliklə səninlə əlaqə saxlayacaq.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html" class="block text-center text-sm text-slate-500 hover:text-brand-teal transition-colors" data-i18n="dash.back">Ana səhifəyə qayıt</a>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script>
+        const session = ASC.getSession();
+        if (!session) {
+            window.location.replace('index.html');
+        }
+
+        const I18N = {
+            "nav.logout": { az: "Çıxış", en: "Log Out" },
+            "dash.profile": { az: "Profil", en: "Profile" },
+            "dash.role.founder": { az: "Startap", en: "Founder" },
+            "dash.role.mentor": { az: "Mentor", en: "Mentor" },
+            "dash.startup": { az: "Startap", en: "Startup" },
+            "dash.description": { az: "Təsvir", en: "Description" },
+            "dash.founder": { az: "Təsisçi", en: "Founder" },
+            "dash.email": { az: "E-poçt", en: "Email" },
+            "dash.expertise": { az: "Sahə", en: "Focus" },
+            "dash.none": { az: "Hələ müraciət yoxdur.", en: "No application yet." },
+            "dash.status.title": { az: "Müraciətin göndərildi", en: "Application submitted" },
+            "dash.status.sub": { az: "Komandamız müraciətini nəzərdən keçirir və tezliklə səninlə əlaqə saxlayacaq.", en: "Our team is reviewing your application and will reach out soon." },
+            "dash.back": { az: "Ana səhifəyə qayıt", en: "Back to home" },
+        };
+
+        let currentLang = 'az';
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.getAttribute('data-i18n');
+                if (I18N[k] && I18N[k][lang] !== undefined) el.textContent = I18N[k][lang];
+            });
+            const az = document.querySelector('[data-lang="az"]');
+            const en = document.querySelector('[data-lang="en"]');
+            az.style.opacity = lang === 'az' ? '1' : '0.4';
+            en.style.opacity = lang === 'en' ? '1' : '0.4';
+            render();
+        }
+
+        function render() {
+            if (!session) return;
+            document.getElementById('userName').textContent = session.name || session.email;
+            document.getElementById('userEmail').textContent = session.email;
+            const isMentor = session.role === 'mentor';
+            document.getElementById('roleBadge').textContent = I18N[isMentor ? 'dash.role.mentor' : 'dash.role.founder'][currentLang];
+            document.getElementById('avatar').textContent = (session.name || 'A').trim().charAt(0).toUpperCase();
+
+            const apps = ASC.getApplicationsForUser(session.id);
+            const profileContent = document.getElementById('profileContent');
+            profileContent.innerHTML = '';
+
+            if (apps.length === 0) {
+                const empty = document.createElement('p');
+                empty.className = 'text-slate-500';
+                empty.textContent = I18N['dash.none'][currentLang];
+                profileContent.appendChild(empty);
+                return;
+            }
+
+            const app = apps[apps.length - 1];
+            const rows = [];
+            if (!isMentor) {
+                rows.push([I18N['dash.startup'][currentLang], app.startupName || '—']);
+                rows.push([I18N['dash.description'][currentLang], app.description || '—']);
+                rows.push([I18N['dash.founder'][currentLang], (app.firstName + ' ' + app.lastName).trim() || '—']);
+            } else {
+                rows.push([I18N['dash.expertise'][currentLang], app.description || '—']);
+            }
+            rows.push([I18N['dash.email'][currentLang], app.email || session.email]);
+
+            rows.forEach(([label, value]) => {
+                const row = document.createElement('div');
+                row.className = 'grid sm:grid-cols-3 gap-2 py-3 border-b border-slate-100 last:border-0';
+                const l = document.createElement('div');
+                l.className = 'text-sm font-semibold text-slate-500';
+                l.textContent = label;
+                const v = document.createElement('div');
+                v.className = 'sm:col-span-2 text-slate-800 font-medium';
+                v.textContent = value;
+                row.appendChild(l);
+                row.appendChild(v);
+                profileContent.appendChild(row);
+            });
+        }
+
+        document.getElementById('langToggle').addEventListener('click', () => {
+            setLang(currentLang === 'az' ? 'en' : 'az');
+        });
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            ASC.logout();
+            window.location.href = 'index.html';
+        });
+
+        setLang('az');
+    </script>
+</body>
+</html>

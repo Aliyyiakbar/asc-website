@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azerbaijan Startup Community</title>
+    <link rel="icon" type="image/png" href="logos/asc-transparent.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -152,6 +153,15 @@
             background: linear-gradient(135deg, #00C9A7, #00D2FF);
             color: #fff;
         }
+
+        .auth-role-btn {
+            color: #64748b;
+        }
+        .auth-role-btn.active {
+            background: linear-gradient(135deg, #00C9A7, #00D2FF);
+            color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(0, 210, 255, 0.5);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-cyan selection:text-white">
@@ -185,6 +195,9 @@
                     <button id="langToggle" class="lang-btn active flex items-center gap-1 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-brand-cyan shrink-0" title="Dili dəyiş / Switch language">
                         <span data-lang="az">AZ</span><span class="opacity-40">/</span><span data-lang="en" class="opacity-40">EN</span>
                     </button>
+                    <button id="loginBtn" class="hidden sm:inline-flex items-center justify-center rounded-full px-5 py-2.5 font-semibold text-brand-blue border-2 border-brand-blue/20 hover:border-brand-cyan hover:text-brand-teal transition-all duration-300 shrink-0">
+                        <span data-i18n="nav.login">Giriş</span>
+                    </button>
                     <a href="#apply" class="hidden sm:inline-flex relative group overflow-hidden rounded-full px-5 sm:px-6 py-2.5 font-semibold text-white shadow-lg hover:shadow-brand-cyan/40 transition-all duration-300 transform hover:-translate-y-0.5">
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] animate-gradient-x"></div>
                         <span class="relative" data-i18n="nav.apply">Müraciət Et</span>
@@ -203,6 +216,7 @@
                     <a href="#team" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.team">Komanda</a>
                     <a href="#join" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.join">Bizə Qoşul</a>
                     <a href="#apply" class="mobile-link mt-2 px-4 py-3 rounded-xl font-semibold text-white text-center bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue" data-i18n="nav.apply">Müraciət Et</a>
+                    <button id="mobileLoginBtn" class="mobile-link mt-1 px-4 py-3 rounded-xl font-semibold text-brand-blue text-center border-2 border-brand-blue/20">Giriş</button>
                 </div>
             </div>
         </div>
@@ -429,37 +443,37 @@
                     <p class="text-slate-600" data-i18n="apply.sub">Qlobal rəqabətə davamlı şirkət qurmaq yolunda ilk addımı atın. Müraciətlər hazırda açıqdır.</p>
                 </div>
 
-                <form class="relative z-10 space-y-6">
+                <form id="applyForm" class="relative z-10 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-slate-700" data-i18n="apply.first">Ad</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.first" placeholder="Adınız">
+                            <input id="applyFirstName" name="firstName" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.first" placeholder="Adın">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-slate-700" data-i18n="apply.last">Soyad</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.last" placeholder="Soyadınız">
+                            <input id="applyLastName" name="lastName" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.last" placeholder="Soyadın">
                         </div>
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-sm font-semibold text-slate-700" data-i18n="apply.email">E-poçt ünvanı</label>
-                        <input type="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.email" placeholder="siz@startap.az">
+                        <input id="applyEmail" name="email" type="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.email" placeholder="sən@startap.az">
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-sm font-semibold text-slate-700" data-i18n="apply.startup">Startap adı və ya layihə ideyası</label>
-                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.startup" placeholder="Layihənin adını daxil et">
+                        <input id="applyStartup" name="startupName" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" data-i18n-ph="apply.ph.startup" placeholder="Layihənin adını daxil et">
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-sm font-semibold text-slate-700" data-i18n="apply.desc">Nə qurduğun barədə bizə məlumat ver</label>
-                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50 resize-none" data-i18n-ph="apply.ph.desc" placeholder="Hansı problemi həll edirsən?"></textarea>
+                        <textarea id="applyDesc" name="description" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50 resize-none" data-i18n-ph="apply.ph.desc" placeholder="Hansı problemi həll edirsən?"></textarea>
                     </div>
 
-                    <button type="button" class="relative group w-full overflow-hidden bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] hover:bg-right text-white font-semibold py-4 rounded-xl transition-all duration-500 shadow-lg shadow-brand-cyan/20 transform hover:-translate-y-1">
+                    <button type="submit" class="relative group w-full overflow-hidden bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] hover:bg-right text-white font-semibold py-4 rounded-xl transition-all duration-500 shadow-lg shadow-brand-cyan/20 transform hover:-translate-y-1">
                         <span data-i18n="apply.submit">Müraciəti Göndər</span>
                     </button>
-                    <p class="text-center text-xs text-slate-500 mt-4" data-i18n="apply.terms">Bu formanı təqdim etməklə İstifadə Şərtlərimizi və Məxfilik Siyasətimizi qəbul etmiş olursunuz.</p>
+                    <p class="text-center text-xs text-slate-500 mt-4" data-i18n="apply.terms">Bu formanı təqdim etməklə İstifadə Şərtlərimizi və Məxfilik Siyasətimizi qəbul etmiş olursan.</p>
                 </form>
             </div>
         </div>
@@ -497,6 +511,50 @@
         </div>
     </footer>
 
+    <!-- Auth modal -->
+    <div id="authModal" class="fixed inset-0 z-[300] hidden items-center justify-center p-4 bg-[rgba(18,42,61,0.6)] backdrop-blur-sm">
+        <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden">
+            <button id="authClose" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors" aria-label="Close">✕</button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-10 mx-auto mb-3">
+                    <img src="logos/asc-logo-tight.png" alt="ASC" class="w-full h-full object-contain">
+                </div>
+                <h3 id="authTitle" class="font-heading text-2xl font-bold text-slate-900" data-i18n="auth.login">Daxil Ol</h3>
+                <p id="authSubtitle" class="text-sm text-slate-500 mt-1" data-i18n="auth.subtitle">Hesabına daxil ol və davam et</p>
+            </div>
+
+            <!-- Role tabs -->
+            <div class="flex rounded-full bg-slate-100 p-1 mb-5" id="authRoleTabs">
+                <button data-role="founder" class="auth-role-btn flex-1 py-2 rounded-full text-sm font-semibold transition-all" data-i18n="auth.role.founder">Startap</button>
+                <button data-role="mentor" class="auth-role-btn flex-1 py-2 rounded-full text-sm font-semibold transition-all" data-i18n="auth.role.mentor">Mentor</button>
+            </div>
+
+            <form id="authForm" class="space-y-4">
+                <div id="authNameField" class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700" data-i18n="auth.name">Ad</label>
+                    <input id="authName" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all" placeholder="">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700" data-i18n="auth.email">E-poçt</label>
+                    <input id="authEmail" type="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all" placeholder="you@startup.az">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700" data-i18n="auth.password">Şifrə</label>
+                    <input id="authPassword" type="password" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all" placeholder="••••••••">
+                </div>
+                <p id="authError" class="hidden text-sm text-rose-600 font-medium text-center"></p>
+                <button type="submit" id="authSubmit" class="w-full relative group overflow-hidden bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-brand-cyan/20 hover:-translate-y-0.5" data-i18n="auth.login">Daxil Ol</button>
+            </form>
+
+            <p class="text-center text-sm text-slate-500 mt-4">
+                <span id="authToggleLabel" data-i18n="auth.noaccount">Hesabın yoxdur?</span>
+                <button id="authToggle" class="text-brand-teal font-semibold hover:text-brand-blue transition-colors" data-i18n="auth.signup">Qeydiyyatdan Keç</button>
+            </p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
     <script>
         // ---------- i18n ----------
         const I18N = {
@@ -600,7 +658,22 @@
             "footer.team": { az: "Komanda", en: "Team" },
             "footer.startups": { az: "Startaplar", en: "Startups" },
             "footer.contact": { az: "Əlaqə", en: "Contact" },
-            "footer.copy": { az: "\u00A9 2026 Azerbaijan Startup Community. Bütün hüquqlar qorunur.", en: "\u00A9 2026 Azerbaijan Startup Community. All rights reserved." }
+            "footer.copy": { az: "\u00A9 2026 Azerbaijan Startup Community. Bütün hüquqlar qorunur.", en: "\u00A9 2026 Azerbaijan Startup Community. All rights reserved." },
+            "nav.login": { az: "Giriş", en: "Log In" },
+            "auth.login": { az: "Daxil Ol", en: "Log In" },
+            "auth.subtitle": { az: "Hesabına daxil ol və davam et", en: "Log in to your account and continue" },
+            "auth.signupsub": { az: "Hesab yarat və yoluna başla", en: "Create an account and get started" },
+            "auth.role.founder": { az: "Startap", en: "Startup" },
+            "auth.role.mentor": { az: "Mentor", en: "Mentor" },
+            "auth.name": { az: "Ad", en: "Name" },
+            "auth.email": { az: "E-poçt", en: "Email" },
+            "auth.password": { az: "Şifrə", en: "Password" },
+            "auth.noaccount": { az: "Hesabın yoxdur?", en: "No account yet?" },
+            "auth.signup": { az: "Qeydiyyatdan Keç", en: "Sign Up" },
+            "auth.haveaccount": { az: "Artıq hesabın var?", en: "Already have an account?" },
+            "auth.error.missing": { az: "Bütün sahələri doldur.", en: "Please fill in all fields." },
+            "auth.error.exists": { az: "Bu e-poçt artıq qeydiyyatdan keçib.", en: "This email is already registered." },
+            "auth.error.invalid": { az: "E-poçt və ya şifrə yanlışdır.", en: "Incorrect email or password." }
         };
 
         let currentLang = 'az';
@@ -736,6 +809,118 @@
 
         // apply default language
         setLang('az');
+
+        // ---------- auth (login / signup) ----------
+        let authMode = 'login';
+        let authRole = 'founder';
+
+        function renderAuth() {
+            const isLogin = authMode === 'login';
+            const el = (id) => document.getElementById(id);
+            el('authTitle').textContent = I18N[isLogin ? 'auth.login' : 'auth.signup'][currentLang];
+            el('authSubtitle').textContent = I18N[isLogin ? 'auth.subtitle' : 'auth.signupsub'][currentLang];
+            el('authSubmit').textContent = I18N[isLogin ? 'auth.login' : 'auth.signup'][currentLang];
+            el('authNameField').style.display = isLogin ? 'none' : '';
+            el('authToggleLabel').textContent = I18N[isLogin ? 'auth.noaccount' : 'auth.haveaccount'][currentLang];
+            el('authToggle').textContent = I18N[isLogin ? 'auth.signup' : 'auth.login'][currentLang];
+            document.querySelectorAll('.auth-role-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-role') === authRole);
+            });
+        }
+
+        function openAuth(mode, role) {
+            authMode = mode || 'login';
+            authRole = role || 'founder';
+            renderAuth();
+            const modal = document.getElementById('authModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeAuth() {
+            const modal = document.getElementById('authModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        function showAuthError(key) {
+            const err = document.getElementById('authError');
+            err.textContent = I18N[key][currentLang];
+            err.classList.remove('hidden');
+        }
+
+        document.getElementById('authClose').addEventListener('click', closeAuth);
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeAuth();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAuth();
+        });
+        document.getElementById('loginBtn').addEventListener('click', () => openAuth('login', 'founder'));
+        document.getElementById('mobileLoginBtn').addEventListener('click', () => openAuth('login', 'founder'));
+        document.getElementById('authToggle').addEventListener('click', () => {
+            authMode = authMode === 'login' ? 'signup' : 'login';
+            renderAuth();
+        });
+        document.querySelectorAll('.auth-role-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                authRole = btn.getAttribute('data-role');
+                renderAuth();
+            });
+        });
+
+        // apply form -> save draft, open auth
+        document.getElementById('applyForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const app = {
+                firstName: document.getElementById('applyFirstName').value.trim(),
+                lastName: document.getElementById('applyLastName').value.trim(),
+                email: document.getElementById('applyEmail').value.trim(),
+                startupName: document.getElementById('applyStartup').value.trim(),
+                description: document.getElementById('applyDesc').value.trim(),
+                role: 'founder',
+            };
+            ASC.setPendingApplication(app);
+            document.getElementById('authName').value = (app.firstName + ' ' + app.lastName).trim();
+            document.getElementById('authEmail').value = app.email;
+            document.getElementById('authPassword').value = '';
+            openAuth('signup', 'founder');
+        });
+
+        // auth form submit
+        document.getElementById('authForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const name = document.getElementById('authName').value.trim();
+            document.getElementById('authError').classList.add('hidden');
+
+            let result;
+            if (authMode === 'login') {
+                result = ASC.logIn(email, password);
+                if (!result.ok) { showAuthError('auth.error.invalid'); return; }
+            } else {
+                result = ASC.signUp({ role: authRole, name, email, password });
+                if (!result.ok) {
+                    showAuthError(result.error === 'exists' ? 'auth.error.exists' : 'auth.error.missing');
+                    return;
+                }
+            }
+
+            const pending = ASC.getPendingApplication();
+            if (pending) {
+                ASC.saveApplication({ userId: result.user.id, ...pending });
+                ASC.clearPendingApplication();
+            }
+            window.location.href = 'dashboard.html';
+        });
+
+        // sync auth modal text on language change
+        const originalSetLang = setLang;
+        setLang = function (lang) {
+            originalSetLang(lang);
+            if (typeof renderAuth === 'function') renderAuth();
+        };
     </script>
 </body>
 </html>
