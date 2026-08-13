@@ -161,6 +161,30 @@
             opacity: 1;
         }
 
+        .brand-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .brand-link:active {
+            transform: scale(0.88) !important;
+            transition: transform 0.1s ease;
+        }
+        .brand-ring {
+            position: absolute;
+            border: 3px solid rgba(0, 210, 255, 0.95);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 1;
+            transform: scale(0.4);
+            animation: ringExpand 0.55s ease-out forwards;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+        }
+        @keyframes ringExpand {
+            to { transform: scale(3.4); opacity: 0; }
+        }
+
         .orb {
             position: absolute;
             border-radius: 9999px;
@@ -278,23 +302,23 @@
         <div class="marquee-mask w-full overflow-hidden">
             <div class="flex w-max animate-marquee items-center" id="marqueeTrack">
                 <div class="flex items-center gap-14 pr-14 shrink-0" id="marqueeGroup">
-                    <img src="logos/fixed_logos/nusgallery.png" alt="NUS Gallery" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/fixed_logos/castingazerbaijan.png" alt="Casting Azerbaijan" class="logo-pill h-9 w-auto object-contain">
-                    <img src="logos/fixed_logos/buvard.png" alt="Bucard" class="logo-pill h-9 w-auto object-contain">
-                    <img src="logos/fixed_logos/floume.png" alt="FlouMe" class="logo-pill h-11 w-auto object-contain">
-                    <span class="logo-pill text-3xl font-extrabold tracking-tight text-slate-800">UWORK</span>
-                    <img src="logos/fixed_logos/luhive.png" alt="Luhive" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/fixed_logos/coffeinnlogo.png" alt="coffeein" class="logo-pill h-9 w-auto object-contain">
-                    <img src="logos/vexxon.png" alt="Vexxon" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/talab.png" alt="TALAB" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/telebe360.png" alt="Tələbə 360" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/arivio.png" alt="Arivio" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/nexed-light.png" alt="Nexed" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/insyde-light.png" alt="Insyde" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/devlab.png" alt="Devlab Talent" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/bonfi.png" alt="Bonfi" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/peerstack.png" alt="Peerstack Academy" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/fixed_logos/holbertonazerbaijan.png" alt="Holberton School Azerbaijan" class="logo-pill h-12 w-auto object-contain">
+                    <a href="https://nus.gallery/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/nusgallery.png" alt="NUS Gallery" class="h-12 w-auto object-contain"></a>
+                    <a href="https://casting.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/castingazerbaijan.png" alt="Casting Azerbaijan" class="h-9 w-auto object-contain"></a>
+                    <a href="https://bucard.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/buvard.png" alt="Bucard" class="h-9 w-auto object-contain"></a>
+                    <a href="https://floume.ai/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/floume.png" alt="FlouMe" class="h-11 w-auto object-contain"></a>
+                    <a href="http://uwork.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><span class="text-3xl font-extrabold tracking-tight text-slate-800">UWORK</span></a>
+                    <a href="https://luhive.com/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/luhive.png" alt="Luhive" class="h-10 w-auto object-contain"></a>
+                    <a href="https://coffeein.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/coffeinnlogo.png" alt="coffeein" class="h-9 w-auto object-contain"></a>
+                    <a href="https://www.vexonsolution.com/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/vexxon.png" alt="Vexxon" class="h-10 w-auto object-contain"></a>
+                    <a href="https://talabapp.co.uk/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/talab.png" alt="TALAB" class="h-10 w-auto object-contain"></a>
+                    <a href="https://www.telebe360.com/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/telebe360.png" alt="Tələbə 360" class="h-12 w-auto object-contain"></a>
+                    <a href="https://arivio.ai/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/arivio.png" alt="Arivio" class="h-10 w-auto object-contain"></a>
+                    <a href="https://nexed.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/nexed-light.png" alt="Nexed" class="h-10 w-auto object-contain"></a>
+                    <a href="https://insyde.info/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/insyde-light.png" alt="Insyde" class="h-12 w-auto object-contain"></a>
+                    <a href="https://devlab.llc/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/devlab.png" alt="Devlab Talent" class="h-12 w-auto object-contain"></a>
+                    <a href="https://www.bonfi.az/az" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/bonfi.png" alt="Bonfi" class="h-10 w-auto object-contain"></a>
+                    <a href="https://peerstack.tech/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/peerstack.png" alt="Peerstack Academy" class="h-10 w-auto object-contain"></a>
+                    <a href="https://holbertonschool.az/" target="_blank" rel="noopener" class="logo-pill brand-link"><img src="logos/fixed_logos/holbertonazerbaijan.png" alt="Holberton School Azerbaijan" class="h-12 w-auto object-contain"></a>
                 </div>
             </div>
         </div>
@@ -710,6 +734,24 @@
         const track = document.getElementById('marqueeTrack');
         const group = document.getElementById('marqueeGroup');
         track.appendChild(group.cloneNode(true));
+
+        // ---------- brand click ring animation (event delegation) ----------
+        track.addEventListener('click', (e) => {
+            const link = e.target.closest('.brand-link');
+            if (!link) return;
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const ring = document.createElement('span');
+            ring.className = 'brand-ring';
+            const size = 34;
+            ring.style.width = size + 'px';
+            ring.style.height = size + 'px';
+            ring.style.left = (x - size / 2) + 'px';
+            ring.style.top = (y - size / 2) + 'px';
+            link.appendChild(ring);
+            setTimeout(() => ring.remove(), 600);
+        });
 
         // ---------- floating particles ----------
         const particlesContainer = document.getElementById('particles');
