@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="az" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,15 +27,15 @@
                     animation: {
                         'blob': 'blob 12s infinite',
                         'blob-slow': 'blob 18s infinite',
-                        'marquee': 'marquee 40s linear infinite',
-                        'marquee-slow': 'marquee 60s linear infinite',
+                        'marquee': 'marquee 45s linear infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'float-slow': 'float 9s ease-in-out infinite',
                         'spin-slow': 'spin 14s linear infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'gradient-x': 'gradientX 6s ease infinite',
-                        'shimmer': 'shimmer 2.5s linear infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
                         'bounce-soft': 'bounceSoft 3s ease-in-out infinite',
+                        'fade-up': 'fadeUp 0.8s ease forwards',
                     },
                     keyframes: {
                         blob: {
@@ -45,7 +45,7 @@
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
                         marquee: {
-                            '0%': { transform: 'translateX(0%)' },
+                            '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' }
                         },
                         float: {
@@ -63,6 +63,10 @@
                         bounceSoft: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-8px)' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
@@ -121,11 +125,6 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
-        .marquee-container {
-            display: flex;
-            width: 200%;
-        }
-
         .marquee-mask {
             mask-image: linear-gradient(to right, transparent 0, black 120px, black calc(100% - 120px), transparent 100%);
             -webkit-mask-image: linear-gradient(to right, transparent 0, black 120px, black calc(100% - 120px), transparent 100%);
@@ -146,19 +145,20 @@
         }
 
         .logo-pill {
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
+            flex-shrink: 0;
         }
         .logo-pill:hover {
-            transform: scale(1.06);
+            transform: scale(1.08) translateY(-2px);
         }
-        .logo-pill:hover img, .logo-pill:hover .wordmark {
-            filter: none !important;
+        .logo-pill img {
+            filter: grayscale(100%) contrast(1.05);
+            opacity: 0.55;
+            transition: all 0.35s ease;
+        }
+        .logo-pill:hover img {
+            filter: grayscale(0%) contrast(1);
             opacity: 1;
-        }
-        .logo-pill img, .logo-pill .wordmark {
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all 0.3s ease;
         }
 
         .orb {
@@ -168,9 +168,37 @@
             mix-blend-mode: multiply;
             pointer-events: none;
         }
+
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #00D2FF, #00C9A7);
+            animation: particleRise linear infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes particleRise {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-110vh) translateX(40px) scale(0.3); opacity: 0; }
+        }
+
+        .lang-btn {
+            transition: all 0.25s ease;
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, #00C9A7, #00D2FF);
+            color: #fff;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-cyan selection:text-white">
+
+    <!-- Scroll progress bar -->
+    <div class="fixed top-0 left-0 h-1 z-[60] bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-violet" id="progressBar" style="width:0%"></div>
 
     <!-- Animated background orbs -->
     <div class="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
@@ -186,23 +214,24 @@
             <div class="glass rounded-2xl flex items-center justify-between px-6 py-3">
                 <a href="#" class="flex items-center gap-3 group">
                     <div class="relative w-10 h-10 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500">
-                        <img src="logos/asc-logo.png" alt="Azerbaijan Startup Community Logo" class="w-10 h-10 object-contain drop-shadow-sm">
+                        <img src="logos/asc-transparent.png" alt="Azerbaijan Startup Community Logo" class="w-10 h-10 object-contain">
                     </div>
-                    <span class="font-heading font-bold text-lg leading-tight text-brand-blue hidden sm:block">
-                        Azerbaijan Startup Community
-                    </span>
+                    <span class="font-heading font-bold text-lg leading-tight text-brand-blue hidden sm:block">Azerbaijan Startup Community</span>
                 </a>
-                <div class="flex items-center gap-6">
+                <div class="flex items-center gap-5">
                     <div class="hidden md:flex gap-8 font-medium text-slate-600">
-                        <a href="#startups" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all">Startups</a>
-                        <a href="#vision" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all">Vision</a>
-                        <a href="#programs" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all">Programs</a>
-                        <a href="#mentors" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all">Mentors</a>
-                        <a href="#join" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all">Join Us</a>
+                        <a href="#startups" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.startups">Startuplar</a>
+                        <a href="#vision" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.vision">Vizyon</a>
+                        <a href="#programs" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.programs">Proqramlar</a>
+                        <a href="#team" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.team">Komanda</a>
+                        <a href="#join" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.join">Bizə Qoşul</a>
                     </div>
+                    <button id="langToggle" class="lang-btn active flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-brand-cyan" title="Dili dəyiş / Switch language">
+                        <span data-lang="az">AZ</span><span class="opacity-40">/</span><span data-lang="en" class="opacity-40">EN</span>
+                    </button>
                     <a href="#apply" class="relative group overflow-hidden rounded-full px-6 py-2.5 font-semibold text-white shadow-lg hover:shadow-brand-cyan/40 transition-all duration-300 transform hover:-translate-y-0.5">
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] animate-gradient-x"></div>
-                        <span class="relative">Apply</span>
+                        <span class="relative" data-i18n="nav.apply">Müraciət Et</span>
                     </a>
                 </div>
             </div>
@@ -210,36 +239,28 @@
     </nav>
 
     <!-- Hero -->
-    <main class="relative z-10 pt-36 pb-16 lg:pt-48 lg:pb-24">
-        <div class="max-w-7xl mx-auto px-6">
+    <main class="relative z-10 pt-36 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+        <div class="absolute inset-0 z-0" id="particles"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="flex flex-col items-center text-center">
-                <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-float">
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-teal"></span>
-                    </span>
-                    <span class="text-sm font-semibold text-brand-blue uppercase tracking-wider">The Future is Here</span>
-                </div>
-
-                <h1 class="reveal reveal-delay-1 font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-                    We Build <br class="hidden md:block">
-                    <span class="text-gradient">Great Companies</span>
+                <h1 class="reveal font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                    <span data-i18n="hero.title1">Biz</span> <span class="text-gradient" data-i18n="hero.title2">Böyük Şirkətlər</span> <span data-i18n="hero.title3">Qururuq</span>
                 </h1>
 
-                <p class="reveal reveal-delay-2 text-xl md:text-2xl text-slate-600 max-w-3xl mb-12 leading-relaxed">
-                    The premier launchpad for ambitious founders in Azerbaijan. We provide the capital, mentorship, and network to scale your vision globally.
+                <p class="reveal reveal-delay-1 text-xl md:text-2xl text-slate-600 max-w-3xl mb-12 leading-relaxed" data-i18n="hero.sub">
+                    Azərbaycanda iddialı qurucular üçün aparıcı start meydançası. Vizyonunuzu qlobal miqyasda böyütmək üçün kapital, mentorluq və şəbəkə təqdim edirik.
                 </p>
 
-                <div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <div class="reveal reveal-delay-2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                     <a href="#apply" class="group relative px-8 py-4 bg-brand-blue text-white rounded-full font-semibold text-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:scale-105 duration-300 shine">
                         <span class="relative flex items-center justify-center gap-2">
-                            Start Your Journey
+                            <span data-i18n="hero.cta1">Səyahətinə Başla</span>
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                         </span>
                     </a>
                     <a href="#programs" class="group px-8 py-4 rounded-full font-semibold text-lg text-brand-blue border-2 border-brand-blue/20 hover:border-brand-cyan hover:text-brand-teal transition-all duration-300 hover:scale-105 bg-white/60 backdrop-blur-sm">
                         <span class="flex items-center justify-center gap-2">
-                            Explore Programs
+                            <span data-i18n="hero.cta2">Proqramları Kəşf Et</span>
                             <svg class="w-5 h-5 animate-bounce-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </span>
                     </a>
@@ -251,48 +272,29 @@
     <!-- Partners marquee -->
     <section id="startups" class="relative z-10 py-16 bg-white/60 backdrop-blur-sm border-y border-white/30 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 mb-10 text-center">
-            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest reveal">Our Partner Brands</h2>
+            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest reveal" data-i18n="partners.title">Partnyor Brendlərimiz</h2>
         </div>
 
-        <div class="marquee-mask w-full inline-flex flex-nowrap overflow-hidden">
-            <div class="marquee-container animate-marquee items-center">
-                <!-- Group 1 -->
-                <div class="flex items-center justify-center gap-14 px-8 min-w-max">
-                    <span class="logo-pill text-3xl font-extrabold tracking-tight text-slate-800 wordmark">N'US <span class="block text-sm tracking-widest font-normal">GALLERY</span></span>
-                    <span class="logo-pill text-3xl italic font-bold text-rose-600 wordmark">Casting <span class="block text-xl font-sans text-slate-800 not-italic -mt-1">Azerbaijan</span></span>
-                    <span class="logo-pill flex items-center gap-2 text-3xl font-bold text-indigo-600 wordmark"><span class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">bd</span> Bucard</span>
-                    <span class="logo-pill text-3xl font-semibold text-pink-500 wordmark">FlouMe<sup class="text-sm">AI</sup></span>
-                    <span class="logo-pill text-3xl font-extrabold text-slate-900 wordmark">UWORK</span>
-                    <span class="logo-pill flex items-center gap-2 text-3xl font-bold text-orange-500 wordmark">😉 Luhive</span>
-                    <span class="logo-pill flex items-center gap-1 text-3xl font-bold text-emerald-600 wordmark">cOffeein</span>
+        <div class="marquee-mask w-full overflow-hidden">
+            <div class="flex w-max animate-marquee items-center" id="marqueeTrack">
+                <div class="flex items-center gap-14 pr-14 shrink-0" id="marqueeGroup">
+                    <img src="logos/fixed_logos/nusgallery.png" alt="NUS Gallery" class="logo-pill h-12 w-auto object-contain">
+                    <img src="logos/fixed_logos/castingazerbaijan.jpg" alt="Casting Azerbaijan" class="logo-pill h-9 w-auto object-contain">
+                    <img src="logos/fixed_logos/buvard.png" alt="Bucard" class="logo-pill h-9 w-auto object-contain">
+                    <img src="logos/fixed_logos/floume.png" alt="FlouMe" class="logo-pill h-11 w-auto object-contain">
+                    <span class="logo-pill text-3xl font-extrabold tracking-tight text-slate-800">UWORK</span>
+                    <img src="logos/fixed_logos/luhive.png" alt="Luhive" class="logo-pill h-10 w-auto object-contain">
+                    <img src="logos/fixed_logos/coffeinnlogo.jpg" alt="coffeein" class="logo-pill h-9 w-auto object-contain">
                     <img src="logos/vexxon.png" alt="Vexxon" class="logo-pill h-10 w-auto object-contain">
                     <img src="logos/talab.png" alt="TALAB" class="logo-pill h-10 w-auto object-contain">
                     <img src="logos/telebe360.png" alt="Tələbə 360" class="logo-pill h-12 w-auto object-contain">
                     <img src="logos/arivio.png" alt="Arivio" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/nexed-dark.png" alt="Nexed" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/insyde.png" alt="Insyde" class="logo-pill h-12 w-auto object-contain">
+                    <img src="logos/nexed-light.png" alt="Nexed" class="logo-pill h-10 w-auto object-contain">
+                    <img src="logos/insyde-light.png" alt="Insyde" class="logo-pill h-12 w-auto object-contain">
                     <img src="logos/devlab.png" alt="Devlab Talent" class="logo-pill h-12 w-auto object-contain">
                     <img src="logos/bonfi.jpg" alt="Bonfi" class="logo-pill h-10 w-auto object-contain rounded-lg">
                     <img src="logos/peerstack.png" alt="Peerstack Academy" class="logo-pill h-10 w-auto object-contain">
-                </div>
-                <!-- Group 2 (duplicate) -->
-                <div class="flex items-center justify-center gap-14 px-8 min-w-max">
-                    <span class="logo-pill text-3xl font-extrabold tracking-tight text-slate-800 wordmark">N'US <span class="block text-sm tracking-widest font-normal">GALLERY</span></span>
-                    <span class="logo-pill text-3xl italic font-bold text-rose-600 wordmark">Casting <span class="block text-xl font-sans text-slate-800 not-italic -mt-1">Azerbaijan</span></span>
-                    <span class="logo-pill flex items-center gap-2 text-3xl font-bold text-indigo-600 wordmark"><span class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">bd</span> Bucard</span>
-                    <span class="logo-pill text-3xl font-semibold text-pink-500 wordmark">FlouMe<sup class="text-sm">AI</sup></span>
-                    <span class="logo-pill text-3xl font-extrabold text-slate-900 wordmark">UWORK</span>
-                    <span class="logo-pill flex items-center gap-2 text-3xl font-bold text-orange-500 wordmark">😉 Luhive</span>
-                    <span class="logo-pill flex items-center gap-1 text-3xl font-bold text-emerald-600 wordmark">cOffeein</span>
-                    <img src="logos/vexxon.png" alt="Vexxon" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/talab.png" alt="TALAB" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/telebe360.png" alt="Tələbə 360" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/arivio.png" alt="Arivio" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/nexed-dark.png" alt="Nexed" class="logo-pill h-10 w-auto object-contain">
-                    <img src="logos/insyde.png" alt="Insyde" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/devlab.png" alt="Devlab Talent" class="logo-pill h-12 w-auto object-contain">
-                    <img src="logos/bonfi.jpg" alt="Bonfi" class="logo-pill h-10 w-auto object-contain rounded-lg">
-                    <img src="logos/peerstack.png" alt="Peerstack Academy" class="logo-pill h-10 w-auto object-contain">
+                    <img src="logos/fixed_logos/holbertonazerbaijan.png" alt="Holberton School Azerbaijan" class="logo-pill h-12 w-auto object-contain">
                 </div>
             </div>
         </div>
@@ -302,9 +304,9 @@
     <section id="vision" class="relative z-10 py-24 lg:py-32">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-                <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block">Why ASC</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6">Fueling Innovation</h2>
-                <p class="text-xl text-slate-600">We do not just provide funding. We provide a complete ecosystem designed to help you build world class products.</p>
+                <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="vision.eyebrow">Niyə Bizimlə Partnyor Olasınız</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="vision.title">İnnovasiyaya Təkan Veririk</h2>
+                <p class="text-xl text-slate-600" data-i18n="vision.sub">Biz yalnız maliyyə təmin etmirik. Dünya səviyyəli məhsullar qurmağınıza kömək etmək üçün tam bir ekosistem təqdim edirik.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
@@ -312,24 +314,24 @@
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-cyan to-brand-teal rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-cyan/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading">Rapid Growth</h3>
-                    <p class="text-slate-600 leading-relaxed">Access top tier resources and strategies to accelerate your go to market motion and scale operations efficiently.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading" data-i18n="vision.c1t">Sürətli İnkişaf</h3>
+                    <p class="text-slate-600 leading-relaxed" data-i18n="vision.c1d">Bazara çıxış hərəkətinizi sürətləndirmək və əməliyyatları səmərəli şəkildə genişləndirmək üçün yüksək səviyyəli resurslara və strategiyalara çıxış.</p>
                 </div>
 
                 <div class="glass-card tilt-card rounded-3xl p-8 group reveal reveal-delay-2 hover:shadow-2xl hover:shadow-brand-teal/20">
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-teal to-brand-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-teal/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading">Global Network</h3>
-                    <p class="text-slate-600 leading-relaxed">Connect with an exclusive community of seasoned mentors, active investors, and visionary alumni founders.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading" data-i18n="vision.c2t">Qlobal Şəbəkə</h3>
+                    <p class="text-slate-600 leading-relaxed" data-i18n="vision.c2d">Təcrübəli mentorlar, aktiv investorlar və vizyoner məzun quruculardan ibarət eksklüziv icma ilə əlaqə qurun.</p>
                 </div>
 
                 <div class="glass-card tilt-card rounded-3xl p-8 group reveal reveal-delay-3 hover:shadow-2xl hover:shadow-brand-blue/20">
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-blue to-brand-violet rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-blue/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading">Smart Capital</h3>
-                    <p class="text-slate-600 leading-relaxed">Early stage funding designed to give you the runway to find product market fit and dominate your niche.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 font-heading" data-i18n="vision.c3t">Ağıllı Kapital</h3>
+                    <p class="text-slate-600 leading-relaxed" data-i18n="vision.c3d">Məhsul bazarı uyğunluğunu tapmaq və öz sahənizdə lider olmaq üçün lazım olan uçuş zolağını təmin edən erkən mərhələ maliyyələşdirməsi.</p>
                 </div>
             </div>
         </div>
@@ -339,9 +341,9 @@
     <section id="programs" class="relative z-10 py-24 bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block">Our Pathways</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6">Programs for Every Stage</h2>
-                <p class="text-xl text-slate-600">Whether you are at the idea stage or ready to scale globally, we have a tailored program to accelerate your growth.</p>
+                <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="programs.eyebrow">Yollarımız</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="programs.title">Hər Mərhələ üçün Proqramlar</h2>
+                <p class="text-xl text-slate-600" data-i18n="programs.sub">İdeya mərhələsində olsanız da, qlobal miqyasda genişlənməyə hazır olsanız da, inkişafınızı sürətləndirmək üçün uyğun proqramımız var.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-10">
@@ -349,14 +351,14 @@
                     <div class="w-16 h-16 bg-gradient-to-br from-brand-cyan to-brand-teal rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand-cyan/20">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-bold text-slate-900 mb-4 font-heading">Incubation</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">Turn your idea into a working MVP. We provide workspace, initial funding, and hands on guidance from experienced builders to find your product market fit.</p>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4 font-heading" data-i18n="programs.inc.title">İnkubasiya</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed" data-i18n="programs.inc.d">İdeyanızı işlək MVP-yə çevirin. Məhsul bazarı uyğunluğunu tapmağınıza kömək etmək üçün iş sahəsi, ilkin maliyyə və təcrübəli quruculardan praktiki rəhbərlik təqdim edirik.</p>
                     <ul class="space-y-3 mb-8 text-slate-700">
-                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 3 Month Intensive Program</li>
-                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Initial funding to build your MVP</li>
-                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Dedicated Entrepreneur in Residence</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.inc.l1">3 Aylıq İntensiv Proqram</span></li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.inc.l2">MVP qurmaq üçün ilkin maliyyə</span></li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.inc.l3">Xüsusi Sahibkar Rezidenti</span></li>
                     </ul>
-                    <a href="#apply" class="inline-flex items-center gap-2 text-brand-blue font-semibold hover:text-brand-cyan transition-colors">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                    <a href="#apply" class="inline-flex items-center gap-2 text-brand-blue font-semibold hover:text-brand-cyan transition-colors"><span data-i18n="programs.learn">Daha çox öyrən</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
                 </div>
 
                 <div class="rounded-3xl p-10 shadow-xl reveal reveal-right reveal-delay-2 relative overflow-hidden hover:shadow-2xl hover:shadow-brand-violet/20 transition-shadow duration-300">
@@ -366,69 +368,50 @@
                         <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h3 class="text-3xl font-bold text-white mb-4 font-heading">Acceleration</h3>
-                        <p class="text-blue-50 mb-6 leading-relaxed">For startups with traction looking to scale exponentially. Access global markets, deep industry networks, and international investors.</p>
+                        <h3 class="text-3xl font-bold text-white mb-4 font-heading" data-i18n="programs.acc.title">Akselerasiya</h3>
+                        <p class="text-blue-50 mb-6 leading-relaxed" data-i18n="programs.acc.d">Eksponensial şəkildə genişlənmək istəyən, traction əldə etmiş startaplar üçün. Qlobal bazarlara, dərin sənaye şəbəkələrinə və beynəlxalq investorlara çıxış.</p>
                         <ul class="space-y-3 mb-8 text-white">
-                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 6 Month Scaling Phase</li>
-                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Follow on funding for growth</li>
-                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Global Market Access Tours</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.acc.l1">6 Aylıq Genişlənmə Mərhələsi</span></li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.acc.l2">İnkişaf üçün təqib maliyyələşdirməsi</span></li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-cyan shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span data-i18n="programs.acc.l3">Qlobal Bazar Giriş Turları</span></li>
                         </ul>
-                        <a href="#apply" class="inline-flex items-center gap-2 text-white font-semibold hover:text-brand-cyan transition-colors">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                        <a href="#apply" class="inline-flex items-center gap-2 text-white font-semibold hover:text-brand-cyan transition-colors"><span data-i18n="programs.learn">Daha çox öyrən</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mentors -->
-    <section id="mentors" class="relative z-10 py-24 lg:py-32 bg-white">
+    <!-- Team -->
+    <section id="team" class="relative z-10 py-24 lg:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                <div class="max-w-2xl">
-                    <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm mb-4 block">World Class Mentors</span>
-                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6">Learn from those who have built it before.</h2>
-                </div>
-                <div class="hidden md:block">
-                    <a href="#apply" class="text-brand-teal font-medium hover:text-brand-blue transition-colors flex items-center gap-2">Apply to meet them <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
-                </div>
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="team.eyebrow">Komanda</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="team.title">Komanda ilə Tanış Olun</h2>
+                <p class="text-xl text-slate-600" data-i18n="team.sub">Azərbaycan startap ekosistemini inkişaf etdirən liderlər.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="group reveal reveal-delay-1">
-                    <div class="relative overflow-hidden rounded-2xl mb-4 aspect-[4/5] bg-gradient-to-br from-brand-cyan via-brand-teal to-brand-blue flex items-center justify-center">
-                        <span class="font-heading text-8xl font-bold text-white/80 select-none">LA</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div class="group reveal reveal-left reveal-delay-1">
+                    <div class="relative overflow-hidden rounded-3xl mb-5 aspect-[4/4] bg-slate-100 shadow-lg">
+                        <img src="logos/fixed_logos/1769061902323.png" alt="Shamsi Bayramzadeh" class="object-cover w-full h-full object-top transform group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <h4 class="font-bold text-xl text-slate-900">Leyla Aliyeva</h4>
-                    <p class="text-brand-teal font-medium mb-1">Former VP Product at FinTech Global</p>
-                    <p class="text-slate-500 text-sm">Product Strategy &amp; Scaling</p>
+                    <h3 class="font-heading text-2xl font-bold text-slate-900">Shamsi Bayramzadeh</h3>
+                    <p class="text-brand-teal font-semibold mb-2">Managing Partner</p>
+                    <p class="text-slate-500 text-sm mb-2">CEO, Holberton School Azerbaijan</p>
+                    <p class="text-slate-600 leading-relaxed text-sm" data-i18n="team.shamsi.bio">FMCG, satış, ticarət marketinqi, biznes inkişafı və rəqəmsal transformasiyada 12 ildən çox təcrübəyə malik biznes lideri. Süni intellekt və rəqəmsal istedad inkişafı, startap ekosistemləri və sənaye-akademiya əməkdaşlığına fokuslanıb.</p>
                 </div>
-                <div class="group reveal reveal-delay-2">
-                    <div class="relative overflow-hidden rounded-2xl mb-4 aspect-[4/5] bg-gradient-to-br from-brand-teal via-brand-cyan to-brand-blue flex items-center justify-center">
-                        <span class="font-heading text-8xl font-bold text-white/80 select-none">TM</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div class="group reveal reveal-right reveal-delay-2">
+                    <div class="relative overflow-hidden rounded-3xl mb-5 aspect-[4/4] bg-slate-100 shadow-lg">
+                        <img src="logos/fixed_logos/1721919816220.jpg" alt="Aliyyiakbar Shirinli" class="object-cover w-full h-full object-top transform group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-teal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <h4 class="font-bold text-xl text-slate-900">Tural Mammadov</h4>
-                    <p class="text-brand-teal font-medium mb-1">Founder &amp; CEO at TechBaku</p>
-                    <p class="text-slate-500 text-sm">B2B SaaS &amp; Growth</p>
-                </div>
-                <div class="group reveal reveal-delay-3">
-                    <div class="relative overflow-hidden rounded-2xl mb-4 aspect-[4/5] bg-gradient-to-br from-brand-blue via-brand-violet to-brand-cyan flex items-center justify-center">
-                        <span class="font-heading text-8xl font-bold text-white/80 select-none">AH</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-violet/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <h4 class="font-bold text-xl text-slate-900">Aysel Hasanova</h4>
-                    <p class="text-brand-teal font-medium mb-1">Partner at Caspian VC</p>
-                    <p class="text-slate-500 text-sm">Fundraising &amp; Metrics</p>
-                </div>
-                <div class="group reveal reveal-delay-3">
-                    <div class="relative overflow-hidden rounded-2xl mb-4 aspect-[4/5] bg-gradient-to-br from-brand-violet via-brand-blue to-brand-teal flex items-center justify-center">
-                        <span class="font-heading text-8xl font-bold text-white/80 select-none">NQ</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <h4 class="font-bold text-xl text-slate-900">Nadir Qasimov</h4>
-                    <p class="text-brand-teal font-medium mb-1">CTO at InnovateAz</p>
-                    <p class="text-slate-500 text-sm">Engineering &amp; AI</p>
+                    <h3 class="font-heading text-2xl font-bold text-slate-900">Aliyyiakbar Shirinli</h3>
+                    <p class="text-brand-teal font-semibold mb-2">Founder &amp; Community Leader</p>
+                    <p class="text-slate-500 text-sm mb-2">Azerbaijan Startup Community</p>
+                    <p class="text-slate-600 leading-relaxed text-sm" data-i18n="team.founder.bio">Azərbaycanlı startap qurucuları və həvəskarları üçün icma qurub idarə edir, bilik mübadiləsi, şəbəkələşmə və əməkdaşlığı təşviq edir. Erkən mərhələ startapları dəstəkləmək üçün tədbirlər, seminarlar və mentorluq proqramları təşkil edir.</p>
                 </div>
             </div>
         </div>
@@ -440,12 +423,12 @@
         <div class="absolute top-0 right-0 w-96 h-96 bg-brand-violet/40 rounded-full filter blur-[80px] animate-blob z-0"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-            <h2 class="font-heading text-4xl md:text-6xl font-bold text-white mb-8 reveal">Ready to build the future?</h2>
-            <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto reveal reveal-delay-1">Join the community of builders, innovators, and game changers shaping the next generation of technology in Azerbaijan.</p>
+            <h2 class="font-heading text-4xl md:text-6xl font-bold text-white mb-8 reveal" data-i18n="join.title">Gələcəyi qurmağa hazırsınız?</h2>
+            <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto reveal reveal-delay-1" data-i18n="join.sub">Azərbaycanda texnologiyanın növbəti nəslini formalaşdıran qurucular, innovatorlar və oyun dəyişdiricilər icmasına qoşulun.</p>
 
             <div class="reveal reveal-delay-2">
                 <a href="#apply" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-brand-blue rounded-full font-bold text-xl hover:scale-105 hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all duration-300">
-                    Apply Now
+                    <span data-i18n="join.cta">İndi Müraciət Et</span>
                     <svg class="w-6 h-6 animate-pulse-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             </div>
@@ -460,41 +443,41 @@
                 <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-violet/10 rounded-full filter blur-[40px] animate-blob-slow"></div>
 
                 <div class="relative z-10 text-center mb-10">
-                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4">Apply to ASC</h2>
-                    <p class="text-slate-600">Take the first step towards building a globally competitive company. Applications are open now.</p>
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4" data-i18n="apply.title">ASC-ə Müraciət Et</h2>
+                    <p class="text-slate-600" data-i18n="apply.sub">Qlobal rəqabətə davamlı şirkət qurmaq yolunda ilk addımı atın. Müraciətlər hazırda açıqdır.</p>
                 </div>
 
                 <form class="relative z-10 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label class="text-sm font-semibold text-slate-700">First Name</label>
+                            <label class="text-sm font-semibold text-slate-700" data-i18n="apply.first">Ad</label>
                             <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" placeholder="John">
                         </div>
                         <div class="space-y-2">
-                            <label class="text-sm font-semibold text-slate-700">Last Name</label>
+                            <label class="text-sm font-semibold text-slate-700" data-i18n="apply.last">Soyad</label>
                             <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" placeholder="Doe">
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-slate-700">Email Address</label>
+                        <label class="text-sm font-semibold text-slate-700" data-i18n="apply.email">E-poçt ünvanı</label>
                         <input type="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" placeholder="john@startup.az">
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-slate-700">Startup Name or Project Idea</label>
-                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" placeholder="Enter your project name">
+                        <label class="text-sm font-semibold text-slate-700" data-i18n="apply.startup">Startap adı və ya layihə ideyası</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50" placeholder="Layihə adınızı daxil edin">
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-slate-700">Tell us about what you are building</label>
-                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50 resize-none" placeholder="What problem are you solving?"></textarea>
+                        <label class="text-sm font-semibold text-slate-700" data-i18n="apply.desc">Nə qurduğunuz haqqında bizə deyin</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all bg-white/50 resize-none" placeholder="Hansı problemi həll edirsiniz?"></textarea>
                     </div>
 
                     <button type="button" class="relative group w-full overflow-hidden bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] hover:bg-right text-white font-semibold py-4 rounded-xl transition-all duration-500 shadow-lg shadow-brand-cyan/20 transform hover:-translate-y-1">
-                        Submit Application
+                        <span data-i18n="apply.submit">Müraciəti Göndər</span>
                     </button>
-                    <p class="text-center text-xs text-slate-500 mt-4">By submitting this form, you agree to our Terms of Service and Privacy Policy.</p>
+                    <p class="text-center text-xs text-slate-500 mt-4" data-i18n="apply.terms">Bu formanı təqdim etməklə Xidmət Şərtlərimizi və Məxfilik Siyasətimizi qəbul edirsiniz.</p>
                 </form>
             </div>
         </div>
@@ -505,73 +488,180 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                 <div class="flex items-center gap-3 group">
-                    <img src="logos/asc-logo.png" alt="Azerbaijan Startup Community Logo" class="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500">
+                    <img src="logos/asc-transparent.png" alt="Azerbaijan Startup Community Logo" class="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500">
                     <span class="font-heading font-bold text-xl text-slate-800">ASC</span>
                 </div>
 
                 <div class="flex gap-8 font-medium text-slate-500">
-                    <a href="#vision" class="hover:text-brand-blue transition-colors">About</a>
-                    <a href="#programs" class="hover:text-brand-blue transition-colors">Programs</a>
-                    <a href="#mentors" class="hover:text-brand-blue transition-colors">Mentors</a>
-                    <a href="#startups" class="hover:text-brand-blue transition-colors">Startups</a>
-                    <a href="#apply" class="hover:text-brand-blue transition-colors">Contact</a>
+                    <a href="#vision" class="hover:text-brand-blue transition-colors" data-i18n="footer.about">Haqqımızda</a>
+                    <a href="#programs" class="hover:text-brand-blue transition-colors" data-i18n="footer.programs">Proqramlar</a>
+                    <a href="#team" class="hover:text-brand-blue transition-colors" data-i18n="footer.team">Komanda</a>
+                    <a href="#startups" class="hover:text-brand-blue transition-colors" data-i18n="footer.startups">Startaplar</a>
+                    <a href="#apply" class="hover:text-brand-blue transition-colors" data-i18n="footer.contact">Əlaqə</a>
                 </div>
 
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-brand-blue hover:text-white hover:scale-110 transition-all duration-300">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-gradient-to-br hover:from-brand-violet hover:to-brand-cyan hover:text-white hover:scale-110 transition-all duration-300">
+                    <a href="https://www.instagram.com/azerbaijanstartupcommunity_" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-gradient-to-br hover:from-violet-500 hover:via-pink-500 hover:to-brand-cyan hover:text-white hover:scale-110 transition-all duration-300" aria-label="Instagram">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/azerbaijan-start-up-community" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-brand-blue hover:text-white hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                 </div>
             </div>
 
             <div class="text-center text-slate-400 text-sm mt-8 border-t border-slate-100 pt-8">
-                <p>&copy; 2026 Azerbaijan Startup Community. All rights reserved.</p>
+                <p data-i18n="footer.copy">&copy; 2026 Azərbaycan Startup Community. Bütün hüquqlar qorunur.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
+        // ---------- i18n ----------
+        const I18N = {
+            "nav.startups": { az: "Startuplar", en: "Startups" },
+            "nav.vision": { az: "Vizyon", en: "Vision" },
+            "nav.programs": { az: "Proqramlar", en: "Programs" },
+            "nav.team": { az: "Komanda", en: "Team" },
+            "nav.join": { az: "Bizə Qoşul", en: "Join Us" },
+            "nav.apply": { az: "Müraciət Et", en: "Apply" },
+            "hero.title1": { az: "Biz", en: "We Build" },
+            "hero.title2": { az: "Böyük Şirkətlər", en: "Great Companies" },
+            "hero.title3": { az: "Qururuq", en: "" },
+            "hero.sub": {
+                az: "Azərbaycanda iddialı qurucular üçün aparıcı start meydançası. Vizyonunuzu qlobal miqyasda böyütmək üçün kapital, mentorluq və şəbəkə təqdim edirik.",
+                en: "The premier launchpad for ambitious founders in Azerbaijan. We provide the capital, mentorship, and network to scale your vision globally."
+            },
+            "hero.cta1": { az: "Səyahətinə Başla", en: "Start Your Journey" },
+            "hero.cta2": { az: "Proqramları Kəşf Et", en: "Explore Programs" },
+            "partners.title": { az: "Partnyor Brendlərimiz", en: "Our Partner Brands" },
+            "vision.eyebrow": { az: "Niyə Bizimlə Partnyor Olasınız", en: "Why Partner With Us" },
+            "vision.title": { az: "İnnovasiyaya Təkan Veririk", en: "Fueling Innovation" },
+            "vision.sub": {
+                az: "Biz yalnız maliyyə təmin etmirik. Dünya səviyyəli məhsullar qurmağınıza kömək etmək üçün tam bir ekosistem təqdim edirik.",
+                en: "We do not just provide funding. We provide a complete ecosystem designed to help you build world class products."
+            },
+            "vision.c1t": { az: "Sürətli İnkişaf", en: "Rapid Growth" },
+            "vision.c1d": {
+                az: "Bazara çıxış hərəkətinizi sürətləndirmək və əməliyyatları səmərəli şəkildə genişləndirmək üçün yüksək səviyyəli resurslara və strategiyalara çıxış.",
+                en: "Access top tier resources and strategies to accelerate your go to market motion and scale operations efficiently."
+            },
+            "vision.c2t": { az: "Qlobal Şəbəkə", en: "Global Network" },
+            "vision.c2d": {
+                az: "Təcrübəli mentorlar, aktiv investorlar və vizyoner məzun quruculardan ibarət eksklüziv icma ilə əlaqə qurun.",
+                en: "Connect with an exclusive community of seasoned mentors, active investors, and visionary alumni founders."
+            },
+            "vision.c3t": { az: "Ağıllı Kapital", en: "Smart Capital" },
+            "vision.c3d": {
+                az: "Məhsul bazarı uyğunluğunu tapmaq və öz sahənizdə lider olmaq üçün lazım olan uçuş zolağını təmin edən erkən mərhələ maliyyələşdirməsi.",
+                en: "Early stage funding designed to give you the runway to find product market fit and dominate your niche."
+            },
+            "programs.eyebrow": { az: "Yollarımız", en: "Our Pathways" },
+            "programs.title": { az: "Hər Mərhələ üçün Proqramlar", en: "Programs for Every Stage" },
+            "programs.sub": {
+                az: "İdeya mərhələsində olsanız da, qlobal miqyasda genişlənməyə hazır olsanız da, inkişafınızı sürətləndirmək üçün uyğun proqramımız var.",
+                en: "Whether you are at the idea stage or ready to scale globally, we have a tailored program to accelerate your growth."
+            },
+            "programs.inc.title": { az: "İnkubasiya", en: "Incubation" },
+            "programs.inc.d": {
+                az: "İdeyanızı işlək MVP-yə çevirin. Məhsul bazarı uyğunluğunu tapmağınıza kömək etmək üçün iş sahəsi, ilkin maliyyə və təcrübəli quruculardan praktiki rəhbərlik təqdim edirik.",
+                en: "Turn your idea into a working MVP. We provide workspace, initial funding, and hands on guidance from experienced builders to find your product market fit."
+            },
+            "programs.inc.l1": { az: "3 Aylıq İntensiv Proqram", en: "3 Month Intensive Program" },
+            "programs.inc.l2": { az: "MVP qurmaq üçün ilkin maliyyə", en: "Initial funding to build your MVP" },
+            "programs.inc.l3": { az: "Xüsusi Sahibkar Rezidenti", en: "Dedicated Entrepreneur in Residence" },
+            "programs.acc.title": { az: "Akselerasiya", en: "Acceleration" },
+            "programs.acc.d": {
+                az: "Eksponensial şəkildə genişlənmək istəyən, traction əldə etmiş startaplar üçün. Qlobal bazarlara, dərin sənaye şəbəkələrinə və beynəlxalq investorlara çıxış.",
+                en: "For startups with traction looking to scale exponentially. Access global markets, deep industry networks, and international investors."
+            },
+            "programs.acc.l1": { az: "6 Aylıq Genişlənmə Mərhələsi", en: "6 Month Scaling Phase" },
+            "programs.acc.l2": { az: "İnkişaf üçün təqib maliyyələşdirməsi", en: "Follow on funding for growth" },
+            "programs.acc.l3": { az: "Qlobal Bazar Giriş Turları", en: "Global Market Access Tours" },
+            "programs.learn": { az: "Daha çox öyrən", en: "Learn More" },
+            "team.eyebrow": { az: "Komanda", en: "Team" },
+            "team.title": { az: "Komanda ilə Tanış Olun", en: "Meet the Team" },
+            "team.sub": { az: "Azərbaycan startap ekosistemini inkişaf etdirən liderlər.", en: "The leaders growing the Azerbaijani startup ecosystem." },
+            "team.shamsi.bio": {
+                az: "FMCG, satış, ticarət marketinqi, biznes inkişafı və rəqəmsal transformasiyada 12 ildən çox təcrübəyə malik biznes lideri. Süni intellekt və rəqəmsal istedad inkişafı, startap ekosistemləri və sənaye-akademiya əməkdaşlığına fokuslanıb.",
+                en: "Business leader with 12+ years of experience in FMCG, sales, trade marketing, business development, and digital transformation. Focused on AI and digital talent development, startup ecosystems, and industry academia collaboration."
+            },
+            "team.founder.bio": {
+                az: "Azərbaycanlı startap qurucuları və həvəskarları üçün icma qurub idarə edir, bilik mübadiləsi, şəbəkələşmə və əməkdaşlığı təşviq edir. Erkən mərhələ startapları dəstəkləmək üçün tədbirlər, seminarlar və mentorluq proqramları təşkil edir.",
+                en: "Founded and leads a community for Azerbaijani startup founders and enthusiasts, fostering knowledge sharing, networking, and collaboration. Organizes events, workshops, and mentorship programs to support early stage startups."
+            },
+            "join.title": { az: "Gələcəyi qurmağa hazırsınız?", en: "Ready to build the future?" },
+            "join.sub": {
+                az: "Azərbaycanda texnologiyanın növbəti nəslini formalaşdıran qurucular, innovatorlar və oyun dəyişdiricilər icmasına qoşulun.",
+                en: "Join the community of builders, innovators, and game changers shaping the next generation of technology in Azerbaijan."
+            },
+            "join.cta": { az: "İndi Müraciət Et", en: "Apply Now" },
+            "apply.title": { az: "ASC-ə Müraciət Et", en: "Apply to ASC" },
+            "apply.sub": { az: "Qlobal rəqabətə davamlı şirkət qurmaq yolunda ilk addımı atın. Müraciətlər hazırda açıqdır.", en: "Take the first step towards building a globally competitive company. Applications are open now." },
+            "apply.first": { az: "Ad", en: "First Name" },
+            "apply.last": { az: "Soyad", en: "Last Name" },
+            "apply.email": { az: "E-poçt ünvanı", en: "Email Address" },
+            "apply.startup": { az: "Startap adı və ya layihə ideyası", en: "Startup Name or Project Idea" },
+            "apply.desc": { az: "Nə qurduğunuz haqqında bizə deyin", en: "Tell us about what you are building" },
+            "apply.submit": { az: "Müraciəti Göndər", en: "Submit Application" },
+            "apply.terms": { az: "Bu formanı təqdim etməklə Xidmət Şərtlərimizi və Məxfilik Siyasətimizi qəbul edirsiniz.", en: "By submitting this form, you agree to our Terms of Service and Privacy Policy." },
+            "footer.about": { az: "Haqqımızda", en: "About" },
+            "footer.programs": { az: "Proqramlar", en: "Programs" },
+            "footer.team": { az: "Komanda", en: "Team" },
+            "footer.startups": { az: "Startaplar", en: "Startups" },
+            "footer.contact": { az: "Əlaqə", en: "Contact" },
+            "footer.copy": { az: "\u00A9 2026 Azərbaycan Startup Community. Bütün hüquqlar qorunur.", en: "\u00A9 2026 Azerbaijan Startup Community. All rights reserved." }
+        };
+
+        let currentLang = 'az';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (I18N[key] && I18N[key][lang] !== undefined) {
+                    el.textContent = I18N[key][lang];
                 }
-            }
+            });
+            // update language toggle
+            const azSpan = document.querySelector('[data-lang="az"]');
+            const enSpan = document.querySelector('[data-lang="en"]');
+            azSpan.style.opacity = lang === 'az' ? '1' : '0.4';
+            enSpan.style.opacity = lang === 'en' ? '1' : '0.4';
+        }
+
+        document.getElementById('langToggle').addEventListener('click', () => {
+            setLang(currentLang === 'az' ? 'en' : 'az');
+        });
+
+        // ---------- reveal on scroll ----------
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
         }
         window.addEventListener("scroll", reveal);
-        window.addEventListener("load", function () {
-            setTimeout(reveal, 100);
-        });
+        window.addEventListener("load", () => setTimeout(reveal, 100));
 
-        // Navbar shrink on scroll
-        const navbar = document.getElementById('navbar');
+        // ---------- scroll progress bar ----------
         window.addEventListener('scroll', () => {
-            const inner = navbar.querySelector('div > div');
-            if (window.scrollY > 20) {
-                inner.classList.add('py-2');
-                inner.classList.remove('py-3');
-            } else {
-                inner.classList.add('py-3');
-                inner.classList.remove('py-2');
-            }
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('progressBar').style.width = progress + '%';
         });
 
-        // 3D tilt effect for cards
-        const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach(card => {
+        // ---------- 3D tilt ----------
+        document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const xPct = x / rect.width - 0.5;
-                const yPct = y / rect.height - 0.5;
+                const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+                const yPct = (e.clientY - rect.top) / rect.height - 0.5;
                 card.style.transform = `perspective(1000px) rotateY(${xPct * 12}deg) rotateX(${-yPct * 12}deg) translateY(-8px)`;
             });
             card.addEventListener('mouseleave', () => {
@@ -579,16 +669,38 @@
             });
         });
 
-        // Mouse parallax on background orbs
+        // ---------- mouse parallax orbs ----------
         document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5);
-            const y = (e.clientY / window.innerHeight - 0.5);
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
             document.querySelectorAll('.orb').forEach((orb, i) => {
                 const depth = (i + 1) * 12;
                 orb.style.marginLeft = `${x * depth}px`;
                 orb.style.marginTop = `${y * depth}px`;
             });
         });
+
+        // ---------- duplicate marquee for seamless loop ----------
+        const track = document.getElementById('marqueeTrack');
+        const group = document.getElementById('marqueeGroup');
+        track.appendChild(group.cloneNode(true));
+
+        // ---------- floating particles ----------
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 18; i++) {
+            const p = document.createElement('span');
+            p.className = 'particle';
+            const size = Math.random() * 8 + 4;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 12) + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        // apply default language
+        setLang('az');
     </script>
 </body>
 </html>
