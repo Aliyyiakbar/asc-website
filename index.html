@@ -7,72 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            cyan: '#00D2FF',
-                            blue: '#2563EB',
-                            teal: '#00C9A7',
-                            violet: '#7C3AED',
-                        }
-                    },
-                    animation: {
-                        'blob': 'blob 12s infinite',
-                        'blob-slow': 'blob 18s infinite',
-                        'marquee': 'marquee 45s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-slow': 'float 9s ease-in-out infinite',
-                        'spin-slow': 'spin 14s linear infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'gradient-x': 'gradientX 6s ease infinite',
-                        'shimmer': 'shimmer 3s linear infinite',
-                        'bounce-soft': 'bounceSoft 3s ease-in-out infinite',
-                        'fade-up': 'fadeUp 0.8s ease forwards',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(40px, -60px) scale(1.15)' },
-                            '66%': { transform: 'translate(-30px, 30px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        marquee: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        gradientX: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                        },
-                        shimmer: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(100%)' },
-                        },
-                        bounceSoft: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-8px)' },
-                        },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="css/tailwind.css">
     <style>
         body {
             background-color: #f8fafc;
@@ -697,6 +632,8 @@
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", () => setTimeout(reveal, 100));
+        document.addEventListener("DOMContentLoaded", () => setTimeout(reveal, 100));
+        setTimeout(reveal, 1500);
 
         // ---------- scroll progress bar ----------
         window.addEventListener('scroll', () => {
