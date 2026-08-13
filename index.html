@@ -169,55 +169,69 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="glass rounded-2xl flex items-center justify-between px-6 py-3">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="relative w-10 h-10 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500">
-                        <img src="logos/asc-transparent.png" alt="Azerbaijan Startup Community Logo" class="w-10 h-10 object-contain">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="glass rounded-2xl flex items-center justify-between px-4 sm:px-6 py-3">
+                <a href="#" class="flex items-center gap-3 group shrink-0 min-w-0">
+                    <div class="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500 shrink-0">
+                        <img src="logos/asc-transparent.png" alt="Azerbaijan Startup Community Logo" class="w-full h-full object-contain">
                     </div>
-                    <span class="font-heading font-bold text-lg leading-tight text-brand-blue hidden sm:block">Azerbaijan Startup Community</span>
+                    <span class="font-heading font-bold text-base sm:text-lg leading-tight text-brand-blue hidden sm:block truncate">Azerbaijan Startup Community</span>
                 </a>
-                <div class="flex items-center gap-5">
-                    <div class="hidden md:flex gap-8 font-medium text-slate-600">
-                        <a href="#startups" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.startups">Startuplar</a>
-                        <a href="#vision" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.vision">Vizyon</a>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <div class="hidden lg:flex gap-6 xl:gap-8 font-medium text-slate-600">
+                        <a href="#startups" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.startups">Startaplar</a>
+                        <a href="#vision" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.vision">Vizyonumuz</a>
                         <a href="#programs" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.programs">Proqramlar</a>
                         <a href="#team" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.team">Komanda</a>
                         <a href="#join" class="hover:text-brand-teal transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-brand-teal after:to-brand-cyan hover:after:w-full after:transition-all" data-i18n="nav.join">Bizə Qoşulun</a>
                     </div>
-                    <button id="langToggle" class="lang-btn active flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-brand-cyan" title="Dili dəyiş / Switch language">
+                    <button id="langToggle" class="lang-btn active flex items-center gap-1 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-brand-cyan shrink-0" title="Dili dəyiş / Switch language">
                         <span data-lang="az">AZ</span><span class="opacity-40">/</span><span data-lang="en" class="opacity-40">EN</span>
                     </button>
-                    <a href="#apply" class="relative group overflow-hidden rounded-full px-6 py-2.5 font-semibold text-white shadow-lg hover:shadow-brand-cyan/40 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <a href="#apply" class="hidden sm:inline-flex relative group overflow-hidden rounded-full px-5 sm:px-6 py-2.5 font-semibold text-white shadow-lg hover:shadow-brand-cyan/40 transition-all duration-300 transform hover:-translate-y-0.5">
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-[length:200%_auto] animate-gradient-x"></div>
                         <span class="relative" data-i18n="nav.apply">Müraciət Edin</span>
                     </a>
+                    <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors shrink-0" aria-label="Menu">
+                        <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobileMenu" class="lg:hidden hidden mt-2">
+                <div class="glass rounded-2xl p-4 flex flex-col gap-1">
+                    <a href="#startups" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.startups">Startaplar</a>
+                    <a href="#vision" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.vision">Vizyonumuz</a>
+                    <a href="#programs" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.programs">Proqramlar</a>
+                    <a href="#team" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.team">Komanda</a>
+                    <a href="#join" class="mobile-link px-4 py-3 rounded-xl font-medium text-slate-700 hover:bg-white/70 hover:text-brand-teal transition-colors" data-i18n="nav.join">Bizə Qoşulun</a>
+                    <a href="#apply" class="mobile-link mt-2 px-4 py-3 rounded-xl font-semibold text-white text-center bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue" data-i18n="nav.apply">Müraciət Edin</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <main class="relative z-10 pt-36 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+    <main class="relative z-10 pt-28 pb-12 sm:pt-36 md:pt-40 lg:pt-48 lg:pb-24 overflow-hidden">
         <div class="absolute inset-0 z-0" id="particles"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
             <div class="flex flex-col items-center text-center">
-                <h1 class="reveal font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                <h1 class="reveal font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
                     <span data-i18n="hero.title1">Biz</span> <span class="text-gradient" data-i18n="hero.title2">böyük startaplar</span> <span data-i18n="hero.title3">qururuq</span>
                 </h1>
 
-                <p class="reveal reveal-delay-1 text-xl md:text-2xl text-slate-600 max-w-3xl mb-12 leading-relaxed" data-i18n="hero.sub">
+                <p class="reveal reveal-delay-1 text-lg sm:text-xl md:text-2xl text-slate-600 max-w-3xl mb-10 sm:mb-12 leading-relaxed px-2" data-i18n="hero.sub">
                     Azərbaycanda iddialı qurucular üçün öncül platforma. Vizyonunuzu qlobal miqyasda böyütmək üçün kapital, mentorluq və şəbəkə təqdim edirik.
                 </p>
 
-                <div class="reveal reveal-delay-2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                    <a href="#apply" class="group relative px-8 py-4 bg-brand-blue text-white rounded-full font-semibold text-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:scale-105 duration-300 shine">
+                <div class="reveal reveal-delay-2 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-2 sm:px-0">
+                    <a href="#apply" class="group relative px-6 sm:px-8 py-3.5 sm:py-4 bg-brand-blue text-white rounded-full font-semibold text-base sm:text-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:scale-105 duration-300 shine">
                         <span class="relative flex items-center justify-center gap-2">
                             <span data-i18n="hero.cta1">Yolunuza Başlayın</span>
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                         </span>
                     </a>
-                    <a href="#programs" class="group px-8 py-4 rounded-full font-semibold text-lg text-brand-blue border-2 border-brand-blue/20 hover:border-brand-cyan hover:text-brand-teal transition-all duration-300 hover:scale-105 bg-white/60 backdrop-blur-sm">
+                    <a href="#programs" class="group px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg text-brand-blue border-2 border-brand-blue/20 hover:border-brand-cyan hover:text-brand-teal transition-all duration-300 hover:scale-105 bg-white/60 backdrop-blur-sm">
                         <span class="flex items-center justify-center gap-2">
                             <span data-i18n="hero.cta2">Proqramları Kəşf Edin</span>
                             <svg class="w-5 h-5 animate-bounce-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -260,16 +274,16 @@
     </section>
 
     <!-- Vision -->
-    <section id="vision" class="relative z-10 py-24 lg:py-32">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+    <section id="vision" class="relative z-10 py-16 md:py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-20 reveal">
                 <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="vision.eyebrow">Niyə Bizimlə Tərəfdaş Olasınız</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="vision.title">İnnovasiyaya Təkan Veririk</h2>
-                <p class="text-xl text-slate-600" data-i18n="vision.sub">Biz yalnız maliyyə ayırmırıq. Dünya səviyyəli məhsullar qurmağınıza kömək edəcək tam bir ekosistem təqdim edirik.</p>
+                <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="vision.title">İnnovasiyaya Təkan Veririk</h2>
+                <p class="text-lg sm:text-xl text-slate-600" data-i18n="vision.sub">Biz yalnız maliyyə ayırmırıq. Dünya səviyyəli məhsullar qurmağınıza kömək edəcək tam bir ekosistem təqdim edirik.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card tilt-card rounded-3xl p-8 group reveal reveal-delay-1 hover:shadow-2xl hover:shadow-brand-cyan/20">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+                <div class="glass-card tilt-card rounded-3xl p-6 md:p-8 group reveal reveal-delay-1 hover:shadow-2xl hover:shadow-brand-cyan/20">
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-cyan to-brand-teal rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-cyan/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
@@ -277,7 +291,7 @@
                     <p class="text-slate-600 leading-relaxed" data-i18n="vision.c1d">Bazara çıxış prosesinizi sürətləndirmək və fəaliyyətinizi səmərəli şəkildə genişləndirmək üçün yüksək səviyyəli resurslara və strategiyalara çıxış əldə edin.</p>
                 </div>
 
-                <div class="glass-card tilt-card rounded-3xl p-8 group reveal reveal-delay-2 hover:shadow-2xl hover:shadow-brand-teal/20">
+                <div class="glass-card tilt-card rounded-3xl p-6 md:p-8 group reveal reveal-delay-2 hover:shadow-2xl hover:shadow-brand-teal/20">
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-teal to-brand-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-teal/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </div>
@@ -285,7 +299,7 @@
                     <p class="text-slate-600 leading-relaxed" data-i18n="vision.c2d">Təcrübəli mentorlar, aktiv investorlar və uzaqgörən məzun quruculardan ibarət eksklüziv icma ilə əlaqə qurun.</p>
                 </div>
 
-                <div class="glass-card tilt-card rounded-3xl p-8 group reveal reveal-delay-3 hover:shadow-2xl hover:shadow-brand-blue/20">
+                <div class="glass-card tilt-card rounded-3xl p-6 md:p-8 group reveal reveal-delay-3 hover:shadow-2xl hover:shadow-brand-blue/20">
                     <div class="w-14 h-14 bg-gradient-to-br from-brand-blue to-brand-violet rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-brand-blue/30">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
@@ -297,16 +311,16 @@
     </section>
 
     <!-- Programs -->
-    <section id="programs" class="relative z-10 py-24 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+    <section id="programs" class="relative z-10 py-16 md:py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
                 <span class="text-brand-teal font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="programs.eyebrow">İstiqamətlərimiz</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="programs.title">Hər Mərhələ üçün Proqramlar</h2>
-                <p class="text-xl text-slate-600" data-i18n="programs.sub">İstər ideya mərhələsində, istərsə də qlobal miqyasda genişlənməyə hazır olun, inkişafınızı sürətləndirmək üçün həmişə proqramımız var.</p>
+                <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="programs.title">Hər Mərhələ üçün Proqramlar</h2>
+                <p class="text-lg sm:text-xl text-slate-600" data-i18n="programs.sub">İstər ideya mərhələsində, istərsə də qlobal miqyasda genişlənməyə hazır olun, inkişafınızı sürətləndirmək üçün həmişə proqramımız var.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="bg-white rounded-3xl p-10 shadow-lg border border-slate-100 reveal reveal-left reveal-delay-1 hover:shadow-2xl hover:shadow-brand-cyan/10 transition-shadow duration-300">
+            <div class="grid md:grid-cols-2 gap-6 md:gap-10">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg border border-slate-100 reveal reveal-left reveal-delay-1 hover:shadow-2xl hover:shadow-brand-cyan/10 transition-shadow duration-300">
                     <div class="w-16 h-16 bg-gradient-to-br from-brand-cyan to-brand-teal rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand-cyan/20">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
@@ -320,7 +334,7 @@
                     <a href="#apply" class="inline-flex items-center gap-2 text-brand-blue font-semibold hover:text-brand-cyan transition-colors"><span data-i18n="programs.learn">Daha Ətraflı</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
                 </div>
 
-                <div class="rounded-3xl p-10 shadow-xl reveal reveal-right reveal-delay-2 relative overflow-hidden hover:shadow-2xl hover:shadow-brand-violet/20 transition-shadow duration-300">
+                <div class="rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl reveal reveal-right reveal-delay-2 relative overflow-hidden hover:shadow-2xl hover:shadow-brand-violet/20 transition-shadow duration-300">
                     <div class="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-violet to-brand-cyan animate-gradient-x bg-[length:200%_200%]"></div>
                     <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/30 rounded-full mix-blend-screen filter blur-[50px] animate-blob"></div>
                     <div class="relative z-10">
@@ -342,15 +356,15 @@
     </section>
 
     <!-- Team -->
-    <section id="team" class="relative z-10 py-24 lg:py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+    <section id="team" class="relative z-10 py-16 md:py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
                 <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm mb-4 block" data-i18n="team.eyebrow">Komanda</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="team.title">Komandamızla Tanış Olun</h2>
-                <p class="text-xl text-slate-600" data-i18n="team.sub">Azərbaycan startap ekosistemini inkişaf etdirən liderlər.</p>
+                <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6" data-i18n="team.title">Komandamızla Tanış Olun</h2>
+                <p class="text-lg sm:text-xl text-slate-600" data-i18n="team.sub">Azərbaycan startap ekosistemini inkişaf etdirən liderlər.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                 <div class="group reveal reveal-left reveal-delay-1">
                     <div class="relative overflow-hidden rounded-3xl mb-5 aspect-[4/4] bg-slate-100 shadow-lg">
                         <img src="logos/fixed_logos/1769061902323.png" alt="Shamsi Bayramzadeh" class="object-cover w-full h-full object-top transform group-hover:scale-105 transition-transform duration-500">
@@ -388,27 +402,27 @@
     </section>
 
     <!-- Join CTA -->
-    <section id="join" class="relative z-10 py-20 lg:py-32 overflow-hidden">
+    <section id="join" class="relative z-10 py-16 md:py-20 lg:py-32 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue animate-gradient-x bg-[length:200%_auto] transform -skew-y-3 scale-110 z-0"></div>
         <div class="absolute top-0 right-0 w-96 h-96 bg-brand-violet/40 rounded-full filter blur-[80px] animate-blob z-0"></div>
 
-        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-            <h2 class="font-heading text-4xl md:text-6xl font-bold text-white mb-8 reveal" data-i18n="join.title">Gələcəyi birlikdə qurmağa hazırsınız?</h2>
-            <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto reveal reveal-delay-1" data-i18n="join.sub">Azərbaycanda texnologiyanın növbəti nəslini formalaşdıran qurucular, innovatorlar və oyun qaydalarını dəyişənlər icmasına qoşulun.</p>
+        <div class="relative z-10 max-w-5xl mx-auto px-5 sm:px-6 text-center">
+            <h2 class="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 md:mb-8 reveal" data-i18n="join.title">Gələcəyi birlikdə qurmağa hazırsınız?</h2>
+            <p class="text-lg sm:text-xl text-white/90 mb-10 sm:mb-12 max-w-2xl mx-auto reveal reveal-delay-1" data-i18n="join.sub">Azərbaycanda texnologiyanın növbəti nəslini formalaşdıran qurucular, innovatorlar və oyun qaydalarını dəyişənlər icmasına qoşulun.</p>
 
             <div class="reveal reveal-delay-2">
-                <a href="#apply" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-brand-blue rounded-full font-bold text-xl hover:scale-105 hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all duration-300">
+                <a href="#apply" class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-white text-brand-blue rounded-full font-bold text-lg sm:text-xl hover:scale-105 hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all duration-300">
                     <span data-i18n="join.cta">İndi Müraciət Edin</span>
-                    <svg class="w-6 h-6 animate-pulse-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 animate-pulse-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Apply form -->
-    <section id="apply" class="relative z-10 py-24 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden reveal">
+    <section id="apply" class="relative z-10 py-16 md:py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-5 sm:px-6">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden reveal">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/10 rounded-full filter blur-[40px] animate-blob"></div>
                 <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-violet/10 rounded-full filter blur-[40px] animate-blob-slow"></div>
 
@@ -462,7 +476,7 @@
                     <span class="font-heading font-bold text-xl text-slate-800">Azerbaijan Startup Community</span>
                 </div>
 
-                <div class="flex gap-8 font-medium text-slate-500">
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 font-medium text-slate-500">
                     <a href="#vision" class="hover:text-brand-blue transition-colors" data-i18n="footer.about">Haqqımızda</a>
                     <a href="#programs" class="hover:text-brand-blue transition-colors" data-i18n="footer.programs">Proqramlar</a>
                     <a href="#team" class="hover:text-brand-blue transition-colors" data-i18n="footer.team">Komanda</a>
@@ -618,6 +632,25 @@
 
         document.getElementById('langToggle').addEventListener('click', () => {
             setLang(currentLang === 'az' ? 'en' : 'az');
+        });
+
+        // ---------- mobile menu toggle ----------
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+        menuToggle.addEventListener('click', () => {
+            const willOpen = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !willOpen);
+            menuIconOpen.classList.toggle('hidden', willOpen);
+            menuIconClose.classList.toggle('hidden', !willOpen);
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
         });
 
         // ---------- reveal on scroll ----------
